@@ -116,8 +116,7 @@ public final class ElementOrder<T> {
    *       </ul>
    * </ul>
    */
-  // TODO(b/142723300): Make this method public
-  static <S> ElementOrder<S> stable() {
+  public static <S> ElementOrder<S> stable() {
     return new ElementOrder<S>(Type.STABLE, null);
   }
 
@@ -138,7 +137,7 @@ public final class ElementOrder<T> {
    * determined by {@code comparator}.
    */
   public static <S> ElementOrder<S> sorted(Comparator<S> comparator) {
-    return new ElementOrder<S>(Type.SORTED, comparator);
+    return new ElementOrder<S>(Type.SORTED, checkNotNull(comparator));
   }
 
   /** Returns the type of ordering used. */
