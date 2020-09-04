@@ -138,6 +138,17 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   }
 
   /**
+   * Returns a successful {@code ListenableFuture<Void>}. This method is equivalent to {@code
+   * immediateFuture(null)} except that it is restricted to produce futures of type {@code Void}.
+   *
+   * @since 29.0
+   */
+  @SuppressWarnings("unchecked")
+  public static ListenableFuture<Void> immediateVoidFuture() {
+    return (ListenableFuture<Void>) ImmediateFuture.NULL;
+  }
+
+  /**
    * Returns a {@code ListenableFuture} which has an exception set immediately upon construction.
    *
    * <p>The returned {@code Future} can't be cancelled, and its {@code isDone()} method always
@@ -260,9 +271,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * }</pre>
    *
    * <p>When selecting an executor, note that {@code directExecutor} is dangerous in some cases. See
-   * the discussion in the {@link ListenableFuture#addListener ListenableFuture.addListener}
-   * documentation. All its warnings about heavyweight listeners are also applicable to heavyweight
-   * functions passed to this method.
+   * the warnings the {@link MoreExecutors#directExecutor} documentation.
    *
    * @param input the primary input {@code Future}
    * @param exceptionType the exception type that triggers use of {@code fallback}. The exception
@@ -327,11 +336,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * }</pre>
    *
    * <p>When selecting an executor, note that {@code directExecutor} is dangerous in some cases. See
-   * the discussion in the {@link ListenableFuture#addListener ListenableFuture.addListener}
-   * documentation. All its warnings about heavyweight listeners are also applicable to heavyweight
-   * functions passed to this method. (Specifically, {@code directExecutor} functions should avoid
-   * heavyweight operations inside {@code AsyncFunction.apply}. Any heavyweight operations should
-   * occur in other threads responsible for completing the returned {@code Future}.)
+   * the warnings the {@link MoreExecutors#directExecutor} documentation.
    *
    * @param input the primary input {@code Future}
    * @param exceptionType the exception type that triggers use of {@code fallback}. The exception
@@ -417,11 +422,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * }</pre>
    *
    * <p>When selecting an executor, note that {@code directExecutor} is dangerous in some cases. See
-   * the discussion in the {@link ListenableFuture#addListener ListenableFuture.addListener}
-   * documentation. All its warnings about heavyweight listeners are also applicable to heavyweight
-   * functions passed to this method. (Specifically, {@code directExecutor} functions should avoid
-   * heavyweight operations inside {@code AsyncFunction.apply}. Any heavyweight operations should
-   * occur in other threads responsible for completing the returned {@code Future}.)
+   * the warnings the {@link MoreExecutors#directExecutor} documentation.
    *
    * <p>The returned {@code Future} attempts to keep its cancellation state in sync with that of the
    * input future and that of the future returned by the chain function. That is, if the returned
@@ -457,9 +458,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * }</pre>
    *
    * <p>When selecting an executor, note that {@code directExecutor} is dangerous in some cases. See
-   * the discussion in the {@link ListenableFuture#addListener ListenableFuture.addListener}
-   * documentation. All its warnings about heavyweight listeners are also applicable to heavyweight
-   * functions passed to this method.
+   * the warnings the {@link MoreExecutors#directExecutor} documentation.
    *
    * <p>The returned {@code Future} attempts to keep its cancellation state in sync with that of the
    * input future. That is, if the returned {@code Future} is cancelled, it will attempt to cancel
@@ -1025,9 +1024,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * }</pre>
    *
    * <p>When selecting an executor, note that {@code directExecutor} is dangerous in some cases. See
-   * the discussion in the {@link ListenableFuture#addListener ListenableFuture.addListener}
-   * documentation. All its warnings about heavyweight listeners are also applicable to heavyweight
-   * callbacks passed to this method.
+   * the warnings the {@link MoreExecutors#directExecutor} documentation.
    *
    * <p>For a more general interface to attach a completion listener to a {@code Future}, see {@link
    * ListenableFuture#addListener addListener}.
