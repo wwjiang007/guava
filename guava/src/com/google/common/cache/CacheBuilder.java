@@ -54,7 +54,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *   <li>accumulation of cache access statistics
  * </ul>
  *
- *
  * <p>These features are all optional; caches can be created using all or none of them. By default
  * cache instances created by {@code CacheBuilder} will not perform any type of eviction.
  *
@@ -477,8 +476,8 @@ public final class CacheBuilder<K, V> {
         this.maximumWeight);
     checkState(
         this.maximumSize == UNSET_INT, "maximum size was already set to %s", this.maximumSize);
-    this.maximumWeight = maximumWeight;
     checkArgument(maximumWeight >= 0, "maximum weight must not be negative");
+    this.maximumWeight = maximumWeight;
     return this;
   }
 

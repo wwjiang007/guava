@@ -62,7 +62,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * monitoring, debugging, and cancellation. Examples of frameworks include:
  *
  * <ul>
- *   <li><a href="http://dagger.dev/producers.html">Dagger Producers</a>
+ *   <li><a href="https://dagger.dev/producers.html">Dagger Producers</a>
  * </ul>
  *
  * <p>If you do chain your operations manually, you may want to use {@link FluentFuture}.
@@ -1007,6 +1007,11 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * callbacks, but any callback added through this method is guaranteed to be called once the
    * computation is complete.
    *
+   * <p>Exceptions thrown by a {@code callback} will be propagated up to the executor. Any exception
+   * thrown during {@code Executor.execute} (e.g., a {@code RejectedExecutionException} or an
+   * exception thrown by {@linkplain MoreExecutors#directExecutor direct execution}) will be caught
+   * and logged.
+   *
    * <p>Example:
    *
    * <pre>{@code
@@ -1109,7 +1114,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      * exceptions' docs suggest that either is acceptable. Google's Java Practices page recommends
      * IllegalArgumentException here, in part to keep its recommendation simple: Static methods
      * should throw IllegalStateException only when they use static state.
-     *
      *
      * Why do we deviate here? The answer: We want for fluentFuture.getDone() to throw the same
      * exception as Futures.getDone(fluentFuture).
